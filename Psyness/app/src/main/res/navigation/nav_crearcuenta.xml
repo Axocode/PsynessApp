@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_crearcuenta"
+    app:startDestination="@id/presentacioncrear">
+
+    <fragment
+        android:id="@+id/presentacioncrear"
+        android:name="com.example.psynessapp.presentacioncrear"
+        android:label="fragment_presentacioncrear"
+        tools:layout="@layout/fragment_presentacioncrear" >
+        <action
+            android:id="@+id/action_presentacioncrear_to_nombreyedad"
+            app:destination="@id/nombreyedad" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/nombreyedad"
+        android:name="com.example.psynessapp.nombreyedad"
+        android:label="fragment_nombreyedad"
+        tools:layout="@layout/fragment_nombreyedad" >
+
+        <action
+            android:id="@+id/action_nombreyedad_to_correoycontra2"
+            app:destination="@id/correoycontra" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/correoycontra"
+        android:name="com.example.psynessapp.correoycontra"
+        android:label="fragment_correoycontra"
+        tools:layout="@layout/fragment_correoycontra" >
+
+
+    </fragment>
+</navigation>
