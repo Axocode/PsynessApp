@@ -46,6 +46,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
         android:layout_width="367dp"
         android:layout_height="86dp"
         android:fontFamily="@font/nunito_medium"
@@ -86,7 +87,7 @@
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.597" />
 
     <Button
         android:id="@+id/btncrearcun"
@@ -105,6 +106,7 @@
         app:strokeColor="@color/morado"></Button>
 
     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="409dp"
         android:layout_height="38dp"
         android:src="@drawable/nuevonegro"
@@ -113,6 +115,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"></ImageView>
+
+    <TextView
+        android:id="@+id/textoRespuesta"
+        android:layout_width="363dp"
+        android:layout_height="26dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/azulcielo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.524" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
