@@ -51,6 +51,7 @@ Button cerrar;
             if (user == null) {
                 Intent intento = new Intent(feed.this, login.class);
                 startActivity(intento);
+                finish();
             }
         }
     }
