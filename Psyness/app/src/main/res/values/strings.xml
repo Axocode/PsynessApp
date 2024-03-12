@@ -9,6 +9,23 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="Presentacion_proyecto">Una Red Social Orientada\nA La Salud Mental</string>
+    <string name="descripcion_proyecto">Buscamos mejorar la salud mental de nuestros usuarios mediante la psicoterapia, la terapia cognitivo conductual y el uso de la tecnología.</string>
+    <string name="etiquetas_titulo">Antes de iniciar</string>
+    <string name="etiquetas_descripcion">Cuales categorias te llaman mas la atencion.</string>
+    <string name="etiqueta_1">Autoestima y confianza</string>
+    <string name="etiqueta_2">Relaciones interpersonales</string>
+    <string name="etiqueta_3">Ansiedad y estres</string>
+    <string name="etiqueta_4">Depresion</string>
+    <string name="etiqueta_5">Resolucion de conflictos</string>
+    <string name="etiqueta_6">Mindfulness y bienestar</string>
+    <string name="etiqueta_7">Crecimiento personal</string>
+    <string name="etiqueta_8">Salud emocional</string>
+    <string name="etiqueta_9">Transtornos</string>
+    <string name="etiqueta_10">Recaidas</string>
+    <string name="etiqueta_11">Problemas de sueño</string>
+    <string name="etiqueta_12">Crecimiento personal</string>
+    <string name="check_box">Contenido sensible</string>
 
 
 </resources>

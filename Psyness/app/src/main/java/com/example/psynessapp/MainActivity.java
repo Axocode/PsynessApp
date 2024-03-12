@@ -25,34 +25,13 @@ public class MainActivity extends Activity {
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                new CheckUserConnectedTask().execute();
+                Intent intento = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(intento);
                 finish();
             }
         };
         Timer tiempo = new Timer();
-        tiempo.schedule(tarea,2000);
-    }
-
-    private class CheckUserConnectedTask extends AsyncTask<Void, Void, InterUsers> {
-
-        @Override
-        protected InterUsers doInBackground(Void... voids) {
-            Context context = MainActivity.this;
-            AppDatabase db = DatabaseClient.getInstance(context).getAppDatabase();
-            InterUsersDAO interUserDao = db.interUserDao();
-            return interUserDao.getUserConnected();
-        }
-
-        @Override
-        protected void onPostExecute(InterUsers user) {
-            super.onPostExecute(user);
-            if (user != null ) {
-                Intent intento = new Intent(MainActivity.this, feed.class);
-                startActivity(intento);
-            } else {
-                Intent intento = new Intent(MainActivity.this, login.class);
-                startActivity(intento);
-            }
-        }
+        tiempo.schedule(tarea, 2000);
     }
 }
+

@@ -3,6 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azulcielo">#99D1FF</color>
+    <color name="azulmasclaro">#B3D9FF </color>
+    <color name="azulcasiblanco">#CCEDFF</color>
     <color name="morado">#787DF1</color>
+    <color name="moradomasclaro">#FF8C8FFA</color>
+    <color name="moradocasiblanco">#FFB3B8FF</color>
     <color name="grisclaro">#373636</color>
+
+
 </resources>
+
+

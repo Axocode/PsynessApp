@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_inicio"
+        android:icon="@drawable/home1"
+        android:title="Inicio"
+        />
+    <item
+        android:id="@+id/navigation_buscar"
+        android:icon="@drawable/buscar"
+        android:title="Buscar" />
+    <item
+        android:id="@+id/navigation_datacenter"
+        android:icon="@drawable/pacma"
+        android:title="Datacenter" />
+    <item
+        android:id="@+id/navigation_mensaje"
+        android:icon="@drawable/message"
+        android:title="Mensajes" />
+    <item
+        android:id="@+id/navigation_confi"
+        android:icon="@drawable/configt"
+        android:title="Ajustes" />
+</menu>

@@ -3,7 +3,7 @@ package com.example.psynessapp;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,18 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.psynessapp.variables.AppDatabase;
 import com.example.psynessapp.variables.DatabaseClient;
 import com.example.psynessapp.variables.InterUsers;
 import com.example.psynessapp.variables.InterUsersDAO;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,8 +29,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class login extends AppCompatActivity implements View.OnClickListener {
     Button buttoncrcuenta,buttoniniciar;
@@ -74,7 +66,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             InterUsers user = new InterUsers();
             String apipass = "wawawawaAxolloros";
             try {
-                URL url = new URL("http://axocode.gerdoc/Psyness/login?iuser="+nombre.getText().toString()+
+                URL url = new URL("http://axocode.gerdoc.com/Psyness/login?iuser="+nombre.getText().toString()+
                         "&ipassword="+contra.getText().toString()+"&apipassword="+apipass);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -144,7 +136,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             protected void onPostExecute(InterUsers user) {
                 super.onPostExecute(user);
                 if (user != null && user.getIUser().equals(resp.getText().toString())) {
-                    Intent intento = new Intent(login.this, feed.class);
+                    Intent intento = new Intent(login.this, etiquetaselegir.class);
                     startActivity(intento);
                     finish();
                 }
