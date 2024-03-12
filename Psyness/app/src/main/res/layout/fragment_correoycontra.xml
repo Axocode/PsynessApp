@@ -84,7 +84,8 @@
                 android:id="@+id/password12"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-
+                android:maxLength="20"
+                android:maxLines="1"
                 android:autofillHints="password"
                 android:fontFamily="@font/nunito_medium"
                 android:inputType="textPassword"
