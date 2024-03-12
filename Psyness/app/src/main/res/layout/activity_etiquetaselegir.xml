@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.741"></TextView>
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/slider5"
+        android:id="@+id/slider6"
         android:layout_width="193dp"
         android:layout_height="51dp"
         android:stepSize="1"
@@ -239,7 +239,7 @@
         app:layout_constraintVertical_bias="0.58" />
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/slider6"
+        android:id="@+id/slider5"
         android:layout_width="193dp"
         android:layout_height="51dp"
         android:stepSize="1"
