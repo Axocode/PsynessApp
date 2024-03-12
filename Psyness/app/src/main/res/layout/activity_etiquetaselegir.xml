@@ -21,8 +21,8 @@
         app:layout_constraintVertical_bias="0.155"></TextView>
 
     <TextView
-        android:layout_width="101dp"
-        android:layout_height="37dp"
+        android:layout_width="109dp"
+        android:layout_height="44dp"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/etiqueta_2"
         android:textSize="14sp"
@@ -69,23 +69,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753"></TextView>
-
-    <TextView
-        android:layout_width="143dp"
-        android:layout_height="26dp"
-        android:fontFamily="@font/nunito_medium"
-        android:text="@string/etiqueta_12"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753"></TextView>
+        app:layout_constraintVertical_bias="0.741"></TextView>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider5"
@@ -102,8 +89,8 @@
         app:layout_constraintVertical_bias="0.459" />
 
     <TextView
-        android:layout_width="85sp"
-        android:layout_height="44sp"
+        android:layout_width="110dp"
+        android:layout_height="44dp"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/etiqueta_6"
         android:textSize="14sp"
@@ -185,17 +172,17 @@
         app:layout_constraintVertical_bias="0.333" />
 
     <TextView
-        android:layout_width="159dp"
-        android:layout_height="20dp"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
         android:fontFamily="@font/nunito_medium"
-        android:text="@string/etiqueta_5"
+        android:text="@string/etiqueta_7"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.536"></TextView>
+        app:layout_constraintVertical_bias="0.535"></TextView>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider10"
@@ -222,7 +209,7 @@
         app:layout_constraintHorizontal_bias="0.819"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296"></TextView>
+        app:layout_constraintVertical_bias="0.293"></TextView>
 
     <TextView
         android:layout_width="71dp"
@@ -273,7 +260,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.295"></TextView>
@@ -300,28 +287,13 @@
         android:valueTo="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
-
-    <com.google.android.material.slider.Slider
-        android:id="@+id/slider12"
-        android:layout_width="193dp"
-        android:layout_height="51dp"
-        android:stepSize="1"
-        android:valueFrom="0"
-        android:valueTo="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintVertical_bias="0.793" />
 
     <TextView
-        android:layout_width="85dp"
-        android:layout_height="44dp"
+        android:layout_width="100dp"
+        android:layout_height="42dp"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/etiqueta_5"
         android:textSize="14sp"
@@ -334,17 +306,17 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="366sp"
-        android:layout_height="47sp"
+        android:layout_width="356dp"
+        android:layout_height="29dp"
         android:fontFamily="@font/nutito_black"
         android:text="@string/etiquetas_descripcion"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
+        app:layout_constraintHorizontal_bias="0.29"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"></TextView>
+        app:layout_constraintVertical_bias="0.084"></TextView>
 
     <TextView
         android:layout_width="215dp"

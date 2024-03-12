@@ -30,7 +30,6 @@ public class etiquetaselegir extends AppCompatActivity implements View.OnClickLi
         configureSlider((Slider) findViewById(R.id.slider9));
         configureSlider((Slider) findViewById(R.id.slider10));
         configureSlider((Slider) findViewById(R.id.slider11));
-        configureSlider((Slider) findViewById(R.id.slider12));
         Button buttonconfirmareti = findViewById(R.id.btnetiquetasconfirmar);
         buttonconfirmareti.setOnClickListener(this);
 
