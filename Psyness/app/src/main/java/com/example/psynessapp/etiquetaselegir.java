@@ -36,6 +36,11 @@ public class etiquetaselegir extends AppCompatActivity implements View.OnClickLi
     }
 
     private void configureSlider(final Slider slider) {
+        slider.setValue(0);
+
+        // Configurar los colores iniciales para el valor 0
+        slider.setTrackTintList(ColorStateList.valueOf(ContextCompat.getColor(etiquetaselegir.this, R.color.azulcasiblanco)));
+        slider.setThumbTintList(ColorStateList.valueOf(ContextCompat.getColor(etiquetaselegir.this, R.color.azulcasiblanco)));
         slider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
