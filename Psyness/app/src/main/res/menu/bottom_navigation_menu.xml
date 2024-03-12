@@ -11,7 +11,7 @@
         android:title="Buscar" />
     <item
         android:id="@+id/navigation_datacenter"
-        android:icon="@drawable/pacma"
+        android:icon="@drawable/tache"
         android:title="Datacenter" />
     <item
         android:id="@+id/navigation_mensaje"
