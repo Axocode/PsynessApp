@@ -122,13 +122,13 @@
         android:stepSize="1"
         android:valueFrom="0"
         android:valueTo="5"
+        app:circularflow_radiusInDP="@string/etiquetas_titulo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205"
-        app:circularflow_radiusInDP="@string/etiquetas_titulo"/>
+        app:layout_constraintVertical_bias="0.205" />
 
     <TextView
         android:layout_width="87dp"
@@ -334,28 +334,44 @@
         android:id="@+id/switchcontnid"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        app:thumbTint="@color/selector_track_color"
-        app:trackTint="@color/apagado"
         android:text="@string/check_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.875"
+        app:thumbTint="@color/selector_track_color"
+        app:trackTint="@color/apagado" />
+
 
     <Button
         android:id="@+id/btnetiquetasconfirmar"
-        android:layout_width="211dp"
-        android:layout_height="53dp"
-        android:text="Siguiente"
+        android:layout_width="177dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/morado"
+        android:fontFamily="@font/nutito_black"
+        android:text="@string/continuar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.952"
+        app:layout_constraintVertical_bias="0.964" />
+
+    <Button
+        android:id="@+id/btnomitir"
+        android:layout_width="177dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/morado"
         android:fontFamily="@font/nutito_black"
-        android:backgroundTint="@color/morado"/>
+        android:text="@string/omitir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

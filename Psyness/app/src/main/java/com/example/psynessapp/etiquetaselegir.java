@@ -16,6 +16,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.example.psynessapp.feed.feed;
+import com.example.psynessapp.variables.AppDatabase;
+import com.example.psynessapp.variables.DatabaseClient;
+import com.example.psynessapp.variables.InterUsers;
+import com.example.psynessapp.variables.InterUsersDAO;
 import com.google.android.material.slider.Slider;
 
 import org.json.JSONException;
@@ -46,7 +51,9 @@ public class etiquetaselegir extends AppCompatActivity implements View.OnClickLi
         configureSlider((Slider) findViewById(R.id.slider10));
         configureSlider((Slider) findViewById(R.id.slider11));
         Button buttonconfirmareti = findViewById(R.id.btnetiquetasconfirmar);
+        Button buttonomitir = findViewById(R.id.btnomitir);
         buttonconfirmareti.setOnClickListener(this);
+        buttonomitir.setOnClickListener(this);
     }
 
     private void configureSlider(final Slider slider) {
@@ -90,6 +97,10 @@ public class etiquetaselegir extends AppCompatActivity implements View.OnClickLi
         String cadenita = ((Button)v).getText().toString();
         if (cadenita.equals("Siguiente")){
             new FetchUserTask().execute();
+        } else if (cadenita.equals("Omitir")) {
+            Intent intento = new Intent(etiquetaselegir.this, feed.class);
+            startActivity(intento);
+            finish();
         }
     }
 

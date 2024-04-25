@@ -3,6 +3,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.json.JSONObject;
+
 @Entity(tableName = "InterUsers")
 public class InterUsers {
     @PrimaryKey( autoGenerate = true)
@@ -143,5 +145,8 @@ public class InterUsers {
 
     public void setIUserActive(boolean IUserActive) {
         this.IUserActive = IUserActive;
+    }
+
+    public void populateFromJson(JSONObject jsonObject) {
     }
 }

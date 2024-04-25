@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,17 +16,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".etiquetaselegir"
+            android:name=".feed.crearPubli"
             android:exported="false"
             android:theme="@style/Theme.Psyness2"/>
+        <activity
+            android:name=".etiquetaselegir"
+            android:exported="false"
+            android:theme="@style/Theme.Psyness2" />
         <activity
             android:name=".MainActivity2"
             android:exported="false"
             android:theme="@style/Theme.Psyness2" />
         <activity
-            android:name=".feed"
+            android:name=".feed.feed"
             android:exported="false"
-            android:label="@string/title_activity_feed"
             android:theme="@style/Theme.Psyness2" />
         <activity
             android:name=".crearcuenta"

@@ -10,11 +10,9 @@
 
         <item name="colorPrimary">@color/azulcielo</item>
         <item name="android:windowBackground">#FFFFFF</item>
-        <item name="android:fontFamily">@font/nunito_medium</item>
+        <item name="android:fontFamily">@font/nutito_black</item>
 
     </style>
-    <style name="CustomBottomNavigationView" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="itemRippleColor">@color/moradomasclaro</item>
-    </style>
+
 
 </resources>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.example.psynessapp.feed.feed;
 import com.example.psynessapp.variables.AppDatabase;
 import com.example.psynessapp.variables.DatabaseClient;
 import com.example.psynessapp.variables.InterUsers;

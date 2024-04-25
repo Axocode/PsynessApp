@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Theme.Psyness2"> <!-- Asegúrate de incluir xmlns:app si planeas usar atributos personalizados de la biblioteca de soporte -->
+
+    <item
+        android:id="@+id/navigation_ajustes"
+        android:icon="@drawable/personalizar"
+        android:title="Ajustes"
+        />
+    <item
+        android:id="@+id/navigation_seguidores"
+        android:title="Seguidores"
+        android:icon="@drawable/bandera_alt"></item>
+    <item
+        android:icon="@drawable/salir_alt"
+        android:title="Salir"
+        android:id="@+id/navigation_salir"
+        ></item>
+
+</menu>

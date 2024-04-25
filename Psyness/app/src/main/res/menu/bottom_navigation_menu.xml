@@ -10,15 +10,17 @@
         android:icon="@drawable/buscar"
         android:title="Buscar" />
     <item
-        android:id="@+id/navigation_datacenter"
-        android:icon="@drawable/tache"
-        android:title="Datacenter" />
+        android:id="@+id/navegition_publicar"
+       android:icon="@drawable/axolot"
+        android:title=""
+
+        />
     <item
         android:id="@+id/navigation_mensaje"
-        android:icon="@drawable/message"
+        android:icon="@drawable/avion_de_papel"
         android:title="Mensajes" />
     <item
-        android:id="@+id/navigation_confi"
-        android:icon="@drawable/configt"
-        android:title="Ajustes" />
+        android:id="@+id/navigation_datecenter"
+        android:icon="@drawable/usuarios"
+        android:title="Datacenter" />
 </menu>

@@ -2,6 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Color para el ítem seleccionado -->
     <item android:color="@color/moradomasclaro" android:state_checked="true" />
+
     <!-- Color por defecto (ítems no seleccionados) -->
 
 </selector>

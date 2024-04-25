@@ -20,4 +20,5 @@ public interface InterUsersDAO {
     @Query("UPDATE interusers SET IUserActive = 0")
     void setDesconectForAllUsers();
 
+
 }
