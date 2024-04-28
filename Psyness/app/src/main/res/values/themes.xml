@@ -6,10 +6,13 @@
     </style>
 
     <style name="Theme.Psyness2" parent="Base.Theme.Psyness" >
-
-
-        <item name="colorPrimary">@color/azulcielo</item>
+        <item name="android:button">@color/morado</item>
+        <item name="android:icon">@color/black</item>
+        <item name="android:itemBackground">@color/black</item>
+        <item name="colorPrimary">@color/morado</item>
         <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/nutito_black</item>
 
     </style>

@@ -1,85 +1,126 @@
-package com.example.psynessapp.feed
+package com.example.psynessapp.feed;
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
-import com.example.psynessapp.R
-import com.example.psynessapp.feed.publiAdapter.publiViewHolder
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-internal class publiAdapter : ListAdapter<publis?, publiViewHolder>(DIFF_CALLBACK) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): publiViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.publis_list_item, parent, false)
-        return publiViewHolder(view)
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.psynessapp.R;
+
+class publiAdapter extends ListAdapter<publis, publiAdapter.publiViewHolder> {
+
+    public static final DiffUtil.ItemCallback<publis> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<publis>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull publis oldpubli, @NonNull publis newItem) {
+                    return oldpubli.getNombre().equals(newItem.getNombre());
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull publis oldpubli, @NonNull publis newItem) {
+                    return oldpubli.equals(newItem);
+                }
+            };
+
+    protected publiAdapter() {
+        super(DIFF_CALLBACK);
     }
 
-    override fun onBindViewHolder(holder: publiViewHolder, position: Int) {
-        val publisItem = getItem(position)
-        holder.bind(publisItem)
+
+    @NonNull
+    @Override
+    public publiAdapter.publiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.publis_list_item, parent, false);
+        return new publiViewHolder(view);
     }
 
-    internal inner class publiViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val likeAnimationView: LottieAnimationView
-        private val nombredeperfil: TextView
-        private val fecha: TextView
-        private val hora: TextView
-        private val publi: TextView
-        private var isLiked = false // Estado local para controlar el toggle de la animación
+    public void onBindViewHolder(@NonNull publiAdapter.publiViewHolder holder, int position) {
+        publis publisItem = getItem(position);
+        holder.bind(publisItem);
 
-        init {
-            nombredeperfil = itemView.findViewById(R.id.txtnombredeperfir)
-            fecha = itemView.findViewById(R.id.txtdia)
-            hora = itemView.findViewById(R.id.txthora)
-            publi = itemView.findViewById(R.id.txtpubli)
-            likeAnimationView = itemView.findViewById(R.id.loveanimaation)
-            likeAnimationView.setOnClickListener { toggleLikeAnimation() }
-        }
 
-        private fun toggleLikeAnimation() {
-            likeAnimationView.removeAllAnimatorListeners() // Limpia previos listeners
-            if (!isLiked) {
-                likeAnimationView.setAnimation(R.raw.love2) // Asegúrate de que esto sea el recurso correcto
-                likeAnimationView.playAnimation()
-                likeAnimationView.addAnimatorListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        likeAnimationView.progress =
-                            0f // Restablece el progreso al final de la animación
-                        likeAnimationView.cancelAnimation() // Para asegurar que se detenga la animación
+    }
+
+    public class publiViewHolder extends RecyclerView.ViewHolder {
+        private final LottieAnimationView likeAnimationView;
+        private TextView nombredeperfil;
+        private TextView fecha;
+        private TextView hora;
+        private TextView publi;
+        private publis publisItem;
+
+        private boolean isLiked = false;
+
+        publiViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nombredeperfil = itemView.findViewById(R.id.txtnombredeperfir);
+            fecha = itemView.findViewById(R.id.txtdia);
+            hora = itemView.findViewById(R.id.txthora);
+            publi = itemView.findViewById(R.id.txtpubli);
+            likeAnimationView = itemView.findViewById(R.id.loveanimaation);
+
+            likeAnimationView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    isLiked = !isLiked;
+                    publisItem.setLiked(isLiked);
+                    if (isLiked) {
+                        likeAnimationView.setAnimation(R.raw.love3);
+                        likeAnimationView.playAnimation();
+                    } else {
+                        likeAnimationView.setAnimation(R.raw.malo);
+                        likeAnimationView.playAnimation();
                     }
-                })
-                isLiked = true
+                }
+            });
+
+
+        }
+
+        private void toggleLikeAnimation(boolean isLiked) {
+            likeAnimationView.removeAllAnimatorListeners();
+
+            if (isLiked) {
+
+                likeAnimationView.setAnimation(R.raw.love3);
+                likeAnimationView.playAnimation();
             } else {
-                likeAnimationView.progress = 0f // Restablece para el próximo clic
-                likeAnimationView.cancelAnimation()
-                isLiked = false
+
+                likeAnimationView.setAnimation(R.raw.malo);
+                likeAnimationView.playAnimation();
             }
         }
 
-        fun bind(publisItem: publis?) {
-            nombredeperfil.text = publisItem!!.nombre
-            fecha.text = publisItem.fecha
-            hora.text = publisItem.hora
-            publi.text = publisItem.publicaccion
-        }
-    }
+        public void bind(publis publisItem) {
+            this.publisItem = publisItem;
+            nombredeperfil.setText(publisItem.getNombre());
+            fecha.setText(publisItem.getFecha());
+            hora.setText(publisItem.getHora());
+            publi.setText(publisItem.getPublicaccion());
 
-    companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<publis> =
-            object : DiffUtil.ItemCallback<publis>() {
-                override fun areItemsTheSame(oldpubli: publis, newItem: publis): Boolean {
-                    return oldpubli.nombre == newItem.nombre
-                }
-
-                override fun areContentsTheSame(oldpubli: publis, newItem: publis): Boolean {
-                    return oldpubli == newItem
-                }
+            isLiked = publisItem.isLiked();
+            if (isLiked) {
+                likeAnimationView.setAnimation(R.raw.love3);
+                likeAnimationView.setProgress(1.0f);
+                likeAnimationView.pauseAnimation();  // Asegura que la animación está pausada
+            } else {
+                likeAnimationView.setAnimation(R.raw.malo);
+                likeAnimationView.setProgress(0);
+                likeAnimationView.pauseAnimation();  // Asegura que la animación está pausada
             }
+        }
+
     }
+
+
 }
+
+

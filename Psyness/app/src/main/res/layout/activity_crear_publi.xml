@@ -15,9 +15,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022">
+        app:layout_constraintVertical_bias="0.019">
 
 
         <Button
@@ -40,35 +41,24 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="712dp"
-
-        android:src="@drawable/profilesidebar3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"></ImageView>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="304dp"
-        android:layout_height="452dp"
+        android:layout_width="323dp"
+        android:layout_height="401dp"
         android:layout_marginTop="1dp"
         android:hint="@string/algoquecompartir"
         android:paddingTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarpubli"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.016">
 
         <EditText
             android:id="@+id/txtcrearpubli"
             android:layout_width="match_parent"
-            android:layout_height="403dp"
+            android:layout_height="match_parent"
             android:fontFamily="@font/nunito_medium"
             android:gravity="top|start"
             android:inputType="textMultiLine|textCapSentences"
@@ -87,12 +77,27 @@
         android:text="@string/check_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.657"
         app:thumbTint="@color/selector_track_color"
         app:trackTint="@color/apagado" />
+
+    <ImageView
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="708dp"
+        android:src="@drawable/profilesidebar3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarpubli"></ImageView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

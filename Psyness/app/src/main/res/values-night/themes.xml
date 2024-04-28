@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Psyness" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Theme.Psyness2" parent="Base.Theme.Psyness" >
+
+        <item name="android:button">@color/azulcielo</item>
+        <item name="android:icon">@color/white</item>
+        <item name="android:itemBackground">@color/white</item>
+        <item name="colorPrimary">@color/azulcielo</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/nutito_black</item>
+
     </style>
+
 </resources>
