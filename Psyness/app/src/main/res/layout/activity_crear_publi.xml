@@ -15,7 +15,6 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.019">
@@ -26,8 +25,6 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:backgroundTint="@color/morado"
-            android:backgroundTintMode="@color/moradomasclaro"
             android:text="Publicar" />
 
         <ImageButton
@@ -38,6 +35,15 @@
             android:background="?attr/selectableItemBackgroundBorderless"
 
             android:src="@drawable/tache" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/close_button2"
+
+            android:background="?attr/selectableItemBackgroundBorderless"
+
+            android:src="@drawable/teche2" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -80,14 +86,14 @@
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657"
+        app:layout_constraintVertical_bias="0.619"
         app:thumbTint="@color/selector_track_color"
         app:trackTint="@color/apagado" />
 
     <ImageView
         android:layout_width="61dp"
         android:layout_height="61dp"
-
+        android:id="@+id/imageCrearpubli"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"

@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.psynessapp.MainActivity2;
 import com.example.psynessapp.R;
 import com.example.psynessapp.login;
 import com.example.psynessapp.variables.AppDatabase;
@@ -31,7 +33,8 @@ import com.google.android.material.navigation.NavigationView;
 public class feed extends AppCompatActivity implements View.OnClickListener {
 
     private DrawerLayout drawer;
-    ImageView perfil;
+    ImageView perfil, perfil2;
+    TextView nombre_Nav, email_nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,16 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
         Button button = findViewById(R.id.btncrearpubli);
         button.setOnClickListener(this);
 
+        View headerView = navigationView.getHeaderView(0);
+
+        perfil2 = headerView.findViewById(R.id.nav_imagen);
+        nombre_Nav= headerView.findViewById(R.id.name);
+        email_nav = headerView.findViewById(R.id.email);
+        new CheckUserConnectedTaskusuarios().execute();
+
+
     }
+
 
 
 
@@ -103,6 +115,32 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
                 finish();
             }
+        }
+    }
+    private class CheckUserConnectedTaskusuarios extends AsyncTask<Void, Void, InterUsers> {
+
+        @Override
+        protected InterUsers doInBackground(Void... voids) {
+            Context context = feed.this;
+            AppDatabase db = DatabaseClient.getInstance(context).getAppDatabase();
+            InterUsersDAO interUserDao = db.interUserDao();
+            return interUserDao.getUserConnected();
+        }
+
+        @Override
+        protected void onPostExecute(InterUsers user) {
+            super.onPostExecute(user);
+            String newUserName = user.getIUser();
+            String newUserEmail = user.getIEmail();
+            String resourceName = user.getIImgNum().replace(".png", "");
+            int imageResId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
+
+
+            nombre_Nav.setText(newUserName);
+            email_nav.setText(newUserEmail);
+            perfil.setImageResource(imageResId);
+            perfil2.setImageResource(imageResId);
+
         }
     }
 }
