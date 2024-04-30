@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,7 @@ class publiAdapter extends ListAdapter<publis, publiAdapter.publiViewHolder> {
         private TextView hora;
         private TextView publi;
         private publis publisItem;
+        private ImageView imgUser;
 
         private boolean isLiked = false;
 
@@ -66,7 +68,7 @@ class publiAdapter extends ListAdapter<publis, publiAdapter.publiViewHolder> {
             hora = itemView.findViewById(R.id.txthora);
             publi = itemView.findViewById(R.id.txtpubli);
             likeAnimationView = itemView.findViewById(R.id.loveanimaation);
-
+            imgUser = itemView.findViewById(R.id.imageFotopubli);
             likeAnimationView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,7 +107,7 @@ class publiAdapter extends ListAdapter<publis, publiAdapter.publiViewHolder> {
             fecha.setText(publisItem.getFecha());
             hora.setText(publisItem.getHora());
             publi.setText(publisItem.getPublicaccion());
-
+            imgUser.setImageResource(publisItem.getImgPubli());
             isLiked = publisItem.isLiked();
             if (isLiked) {
                 likeAnimationView.setAnimation(R.raw.love3);

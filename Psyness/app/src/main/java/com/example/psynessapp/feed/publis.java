@@ -9,13 +9,17 @@ public class publis {
     private String hora;
     private String fecha;
     private String publicaccion;
+    private int imgPubli;
     private boolean isLiked;
-    public publis(String nombre, String hora, String fecha, String publicaccion) {
+
+    public publis(String nombre, String hora, String fecha, String publicaccion, int imgPubli) {
         this.nombre = nombre;
         this.hora = hora;
         this.fecha = fecha;
         this.publicaccion = publicaccion;
+        this.imgPubli = imgPubli;
     }
+
     public String getNombre() {
         return nombre;
     }
@@ -48,19 +52,26 @@ public class publis {
         this.publicaccion = publicaccion;
     }
 
+    public int getImgPubli() {
+        return imgPubli;
+    }
+
+    public void setImgPubli(int imgPubli) {
+        this.imgPubli = imgPubli;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         publis publis = (publis) o;
-        return Objects.equals(nombre, publis.nombre) && Objects.equals(hora, publis.hora) && Objects.equals(fecha, publis.fecha) && Objects.equals(publicaccion, publis.publicaccion);
+        return Objects.equals(nombre, publis.nombre) && Objects.equals(hora, publis.hora) && Objects.equals(fecha, publis.fecha) && Objects.equals(publicaccion, publis.publicaccion) && Objects.equals(imgPubli, publis.imgPubli);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(nombre, hora, fecha, publicaccion);
+        return Objects.hash(nombre, hora, fecha, publicaccion, imgPubli);
     }
 
 

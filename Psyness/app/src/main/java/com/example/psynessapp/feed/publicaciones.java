@@ -1,34 +1,43 @@
 package com.example.psynessapp.feed;
 
-import static androidx.databinding.DataBindingUtil.setContentView;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.psynessapp.R;
+import com.example.psynessapp.databinding.FragmentPublicacionesBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-
-import org.jetbrains.annotations.Nullable;
-
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class publicaciones extends Fragment {
-    private com.example.psynessapp.databinding.FragmentPublicacionesBinding binding;
+    private int ciclo = 0;
+    private final int TAMANO_PAGINA = 5;
+    private FragmentPublicacionesBinding binding;
+    private publiAdapter adapter;
+
+    private ArrayList<publis> publisList = new ArrayList<>();
 
     public static publicaciones newInstance(String param1, String param2) {
         publicaciones fragment = new publicaciones();
-
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,239 +49,94 @@ public class publicaciones extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = com.example.psynessapp.databinding.FragmentPublicacionesBinding.inflate(inflater, container, false);
+        binding = FragmentPublicacionesBinding.inflate(inflater, container, false);
         binding.publisrecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        ArrayList<publis> publisList = new ArrayList<>();
+        adapter = new publiAdapter();
+        binding.publisrecycler.setAdapter(adapter);
+        publisList = new ArrayList<>();
+        cargarMasPublicaciones();
 
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
+        binding.publisrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
 
-        publisList.add(new publis("joagan","20:10","25 de abrl","Putos todos menos yo JAJAJAJA"));
-        publisList.add(new publis("axek","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("a","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("g","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("v","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("1","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("45","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Esto es un easteregg" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publisList.add(new publis("Yael","20:10","25 de abrl","Putos todos menos yo JAJAJAJA" +
-                "lolololo" +
-                "a" +
-                "a" +
-                "a"));
-        publiAdapter publiAdapter = new publiAdapter();
-        binding.publisrecycler.setAdapter(publiAdapter);
-        publiAdapter.submitList(publisList);
+                if (!recyclerView.isComputingLayout() && totalItemCount <= lastVisibleItem + TAMANO_PAGINA) {
+                    cargarMasPublicaciones();
+                }
+            }
+        });
+
         return binding.getRoot();
-
     }
+
+    private boolean estaCargando = false;
+    private void cargarMasPublicaciones() {
+        if (estaCargando) return;
+
+        estaCargando = true;
+        OkHttpClient client = new OkHttpClient();
+        String url = "http://axocode.gerdoc.com/Psyness/feed?apipassword=Gael&ciclo=" + ciclo;
+        Request request = new Request.Builder().url(url).build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseBody = response.body().string();
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+                    List<Map<String, Object>> responseList = gson.fromJson(responseBody, listType);
+
+                    List<publis> nuevasPublicaciones = new ArrayList<>();
+                    for (Map<String, Object> item : responseList) {
+                        String nombre = Objects.toString(item.get("IUser"),"");
+                        String hora = Objects.toString(item.get("PubHour"), "").substring(0,5);
+                        String fecha = Objects.toString(item.get("PubDate"), "");
+                        String publicaccion = Objects.toString(item.get("PubCont"), "");
+                        String resourceName = Objects.toString(item.get("IImgNum"), "").replace(".png", "");
+                        int imageResId = getResources().getIdentifier(resourceName, "drawable", getActivity().getPackageName());
+                        boolean isLiked = false;
+
+                        publis nuevaPublicacion = new publis(nombre, hora, fecha, publicaccion,imageResId);
+                        nuevaPublicacion.setLiked(isLiked);
+                        nuevasPublicaciones.add(nuevaPublicacion);
+                    }
+
+                    if (!nuevasPublicaciones.isEmpty()) {
+                        publisList.addAll(nuevasPublicaciones);
+                        getActivity().runOnUiThread(() -> {
+                            adapter.submitList(new ArrayList<>(publisList));
+                            binding.publisrecycler.post(() -> binding.publisrecycler.scrollToPosition(0));
+                            estaCargando = false;
+                        });
+
+                        ciclo++;
+                    } else {
+                        estaCargando = false;
+                    }
+                } else {
+                    estaCargando = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                estaCargando = false;
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Es importante anular la referencia del binding cuando la vista se destruye
         binding = null;
-
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
-
     }
 }
