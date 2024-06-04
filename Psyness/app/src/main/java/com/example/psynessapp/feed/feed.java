@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.psynessapp.Ajustes.ajustesperfil;
 import com.example.psynessapp.MainActivity2;
 import com.example.psynessapp.R;
 import com.example.psynessapp.login;
@@ -73,6 +74,10 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
         int id = item.getItemId();
         if (id == R.id.navigation_salir) {
             new CheckUserConnectedTask().execute();
+        } else if (id == R.id.navigation_ajustes) {
+
+            Intent intent = new Intent(feed.this, ajustesperfil.class);
+            startActivity(intent);
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

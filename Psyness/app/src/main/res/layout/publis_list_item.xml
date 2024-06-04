@@ -23,13 +23,16 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="2dp"
             android:layout_toEndOf="@+id/imageFotopubli"
             android:fontFamily="@font/nutito_black"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtpubli"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.161"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toEndOf="@+id/imageFotopubli"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:text="Nombre"></TextView>
 
         <TextView
@@ -38,16 +41,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="3dp"
-            android:fontFamily="@font/nunito_medium"
 
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/nunito_medium"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtpubli"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.148"
-            app:layout_constraintStart_toEndOf="@+id/txthora"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             tools:text="Fecha"></TextView>
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="3dp"
             android:layout_toEndOf="@+id/imageFotopubli"
             android:fontFamily="@font/nunito_medium"
@@ -64,7 +64,7 @@
             app:layout_constraintBottom_toTopOf="@+id/txtpubli"
             app:layout_constraintStart_toEndOf="@+id/txtnombredeperfir"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.909"
             tools:text="Hora"></TextView>
 
         <TextView
@@ -113,10 +113,10 @@
             android:id="@+id/imageView3"
             android:layout_width="32dp"
             android:layout_height="26dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.897"
-            app:layout_constraintStart_toEndOf="@+id/txtdia"
+            app:layout_constraintHorizontal_bias="0.931"
+            app:layout_constraintStart_toEndOf="@+id/txthora"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_puntos" />
 

@@ -16,9 +16,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".feed.crearPubli"
+            android:name=".Ajustes.ajustesperfil"
             android:exported="false"
             android:theme="@style/Theme.Psyness2"/>
+        <activity
+            android:name=".feed.crearPubli"
+            android:exported="false"
+            android:theme="@style/Theme.Psyness2" />
         <activity
             android:name=".etiquetaselegir"
             android:exported="false"

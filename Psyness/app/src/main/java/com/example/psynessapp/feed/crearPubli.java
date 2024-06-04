@@ -2,11 +2,15 @@ package com.example.psynessapp.feed;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,14 +30,30 @@ public class crearPubli extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_publi);
-        ImageButton closeButton = findViewById(R.id.close_button);
-        closeButton.setOnClickListener(this);
-        ImageButton closeButton2 = findViewById(R.id.close_button2);
-        closeButton2.setOnClickListener(this);
 
+
+        Toolbar toolbar = findViewById(R.id.toolbarpubli);
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle("");
+
+        }
         imageViewCrear = findViewById(R.id.imageCrearpubli);
         new crearPubli.CheckUserConnectedTaskusuarios().execute();
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

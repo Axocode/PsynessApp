@@ -29,6 +29,7 @@
     <string name="check_box">Contenido sensible</string>
     <string name="omitir">Omitir</string>
     <string name="algoquecompartir">¿Tienes algo que compartir?</string>
+    <string name="descripcion">Esta es mi descripcion</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

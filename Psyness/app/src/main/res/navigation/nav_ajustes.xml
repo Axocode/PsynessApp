@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_ajustes"
+    app:startDestination="@id/fragment_modificar">
+
+    <fragment
+        android:id="@+id/fragment_modificar"
+        android:name="com.example.psynessapp.Ajustes.fragment_modificar"
+        android:label="fragment_modificar" >
+        <action
+            android:id="@+id/action_fragment_modificar_to_fragment_foto"
+            app:destination="@id/fragment_foto" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_foto"
+        android:name="com.example.psynessapp.Ajustes.fragment_foto"
+        android:label="fragment_foto"
+        tools:layout="@layout/fragment_foto" />
+</navigation>
