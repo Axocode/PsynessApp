@@ -31,6 +31,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.psynessapp.Ajustes.ajustesperfil;
 import com.example.psynessapp.MainActivity2;
@@ -181,7 +182,6 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
 
                         // Obtener el token de FCM
                         String token = task.getResult();
-                        String url = "http://192.168.0.3:8080/Psyness/notificacion";
 
                         // Obtener el número de usuario de SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("appPrefs", MODE_PRIVATE);
@@ -192,35 +192,31 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
                             return;
                         }
 
-                        JSONObject locationData = new JSONObject();
-                        try {
-                            locationData.put("userId", userId); // Usar el ID de usuario obtenido de SharedPreferences
-                            locationData.put("latitude", location.getLatitude());
-                            locationData.put("longitude", location.getLongitude());
-                            locationData.put("mensaje", "Hola, ¡lindo día!"); // Mensaje de ejemplo, puedes actualizarlo según sea necesario
-                            locationData.put("userToken", token);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                                (Request.Method.POST, url, locationData, new Response.Listener<JSONObject>() {
+                        String url = "http://axocode.gerdoc.com/Psyness/notificacion" +
+                                "?userId=" + userId +
+                                "&latitude=" + location.getLatitude() +
+                                "&longitude=" + location.getLongitude() +
+                                "&userToken=" + token;
+                        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                                new Response.Listener<String>() {
                                     @Override
-                                    public void onResponse(JSONObject response) {
+                                    public void onResponse(String response) {
                                         // Manejar la respuesta del servidor
                                     }
                                 }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        // Manejar errores
-                                    }
-                                });
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Manejar errores
+                            }
+                        });
 
                         RequestQueue requestQueue = Volley.newRequestQueue(feed.this);
-                        requestQueue.add(jsonObjectRequest);
+                        requestQueue.add(stringRequest);
                     }
                 });
     }
+
+
 
 
     private boolean onNavigationItemSelected(MenuItem item) {

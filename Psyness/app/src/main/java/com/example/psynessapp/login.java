@@ -65,13 +65,33 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Inicializar Firebase
         FirebaseApp.initializeApp(this);
+
+        // Inicializar FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // Configurar LocationRequest
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(10000); // 10 segundos
         locationRequest.setFastestInterval(5000); // 5 segundos
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        // Inicializar LocationCallback
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    // Actualiza la ubicación en tu servidor
+                }
+            }
+        };
+
+        // Verificar y solicitar permisos de ubicación
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         } else {
@@ -86,8 +106,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         buttoncrcuenta.setOnClickListener(this);
         buttoniniciar = findViewById(R.id.btnlogin);
         buttoniniciar.setOnClickListener(this);
-
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -101,18 +121,58 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             startLocationUpdates();
         }
     }
+
     private void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+    }
+
+    private void updateLocationOnServer(Location location) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Obtener el token de FCM
+                        String token = task.getResult();
+                        String url = "http://axocode.gerdoc.com/Psyness/notificacion"; // Cambia esto por tu URL del servidor
+
+                        JSONObject locationData = new JSONObject();
+                        try {
+                            SharedPreferences sharedPreferences = getSharedPreferences("appPrefs", MODE_PRIVATE);
+                            int userId = sharedPreferences.getInt("userId", -1);
+                            locationData.put("userId", userId);
+                            locationData.put("latitude", location.getLatitude());
+                            locationData.put("longitude", location.getLongitude());
+                            locationData.put("message", "Lindo día"); // Mensaje de ejemplo, puedes actualizarlo según sea necesario
+                            locationData.put("token", token);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                                (Request.Method.POST, url, locationData, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        // Manejar la respuesta del servidor
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        // Manejar errores
+                                    }
+                                });
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(login.this);
+                        requestQueue.add(jsonObjectRequest);
+                    }
+                });
     }
 
     @Override
@@ -146,7 +206,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 }
                 String jsonResponse = stringBuilder.toString();
 
-
                 JSONObject jsonObject = new JSONObject(jsonResponse);
 
                 if (jsonObject.length()<5){
@@ -167,18 +226,14 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     user.setIImgNum(jsonObject.getString("IImgNum"));
                     user.setIUserActive(true);
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("appPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("userId", user.getIUserNum());
-                    editor.apply();
 
 
-                        resp.setText(user.getIUser());
-                        Context context = login.this;
-                        AppDatabase db = DatabaseClient.getInstance(context).getAppDatabase();
-                        InterUsersDAO interUserDao = db.interUserDao();
-                        interUserDao.setDesconectForAllUsers();
-                        interUserDao.insert(user);
+                    resp.setText(user.getIUser());
+                    Context context = login.this;
+                    AppDatabase db = DatabaseClient.getInstance(context).getAppDatabase();
+                    InterUsersDAO interUserDao = db.interUserDao();
+                    interUserDao.setDesconectForAllUsers();
+                    interUserDao.insert(user);
 
                     return user;
                 }
@@ -194,7 +249,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 new CheckUserConnectedTask().execute();
             }
         }
-    private class CheckUserConnectedTask extends AsyncTask<Void, Void, InterUsers> {
+
+        private class CheckUserConnectedTask extends AsyncTask<Void, Void, InterUsers> {
 
             @Override
             protected InterUsers doInBackground(Void... voids) {
@@ -208,6 +264,10 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             protected void onPostExecute(InterUsers user) {
                 super.onPostExecute(user);
                 if (user != null && user.getIUser().equals(resp.getText().toString())) {
+                    SharedPreferences sharedPreferences = getSharedPreferences("appPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("userId", user.getIUserNum());
+                    editor.apply();
                     Intent intento = new Intent(login.this, etiquetaselegir.class);
                     startActivity(intento);
                     finish();
