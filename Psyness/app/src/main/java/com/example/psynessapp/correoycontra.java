@@ -1,9 +1,11 @@
 package com.example.psynessapp;
 
+import static android.content.Context.MODE_PRIVATE;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -79,7 +81,7 @@ public class correoycontra extends Fragment implements View.OnClickListener {
     }
 
     private class FetchUserTask extends AsyncTask<Void, Void, InterUsers> {
-
+        private Context context;
         @Override
         protected InterUsers doInBackground(Void... voids) {
             InterUsers user = new InterUsers();
@@ -122,6 +124,11 @@ public class correoycontra extends Fragment implements View.OnClickListener {
                     user.setIUserSeguidos(jsonObject.getInt("IUserSeguidos"));
                     user.setIImgNum(jsonObject.getString("IImgNum"));
                     user.setIUserActive(true);
+
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("appPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("userId", user.getIUserNum());
+                    editor.apply();
 
                     respuesta.setText(user.getIUser());
                     Context context = getContext();

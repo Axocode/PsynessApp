@@ -12,6 +12,7 @@ import com.example.psynessapp.variables.AppDatabase;
 import com.example.psynessapp.variables.DatabaseClient;
 import com.example.psynessapp.variables.InterUsers;
 import com.example.psynessapp.variables.InterUsersDAO;
+import com.google.firebase.FirebaseApp;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,6 +22,7 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main2);
         TimerTask tarea = new TimerTask() {
             @Override
