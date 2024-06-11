@@ -30,4 +30,5 @@
         android:text="usuario@example.com"
         android:textSize="16sp" />
 
+
 </LinearLayout>

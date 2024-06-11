@@ -14,6 +14,8 @@ import com.example.psynessapp.databinding.FragmentPublicacionesBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -32,14 +34,11 @@ public class publicaciones extends Fragment {
     private final int TAMANO_PAGINA = 5;
     private FragmentPublicacionesBinding binding;
     private publiAdapter adapter;
-
     private ArrayList<publis> publisList = new ArrayList<>();
+    private boolean estaCargando = false;
 
-    public static publicaciones newInstance(String param1, String param2) {
-        publicaciones fragment = new publicaciones();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public static publicaciones newInstance() {
+        return new publicaciones();
     }
 
     public publicaciones() {
@@ -51,14 +50,33 @@ public class publicaciones extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPublicacionesBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        configurarRecyclerView();
+        configurarSwipeRefreshLayout();
+        cargarMasPublicaciones();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Recargar los datos cuando el fragmento se vuelve visible
+        ciclo = 0;  // Reinicia el ciclo si es necesario
+        publisList.clear();  // Limpia la lista de publicaciones
+        cargarMasPublicaciones();  // Vuelve a cargar las publicaciones
+    }
+
+    private void configurarRecyclerView() {
         binding.publisrecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new publiAdapter();
         binding.publisrecycler.setAdapter(adapter);
-        publisList = new ArrayList<>();
-        cargarMasPublicaciones();
-
         binding.publisrecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -72,11 +90,16 @@ public class publicaciones extends Fragment {
                 }
             }
         });
-
-        return binding.getRoot();
     }
 
-    private boolean estaCargando = false;
+    private void configurarSwipeRefreshLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            ciclo = 0;  // Reinicia el ciclo si es necesario
+            publisList.clear();  // Limpia la lista de publicaciones
+            cargarMasPublicaciones();  // Vuelve a cargar las publicaciones
+        });
+    }
+
     private void cargarMasPublicaciones() {
         if (estaCargando) return;
 
@@ -99,12 +122,12 @@ public class publicaciones extends Fragment {
                         String nombre = Objects.toString(item.get("IUser"),"");
                         String hora = Objects.toString(item.get("PubHour"), "").substring(0,5);
                         String fecha = Objects.toString(item.get("PubDate"), "");
-                        String publicaccion = Objects.toString(item.get("PubCont"), "");
+                        String publicacion = Objects.toString(item.get("PubCont"), "");
                         String resourceName = Objects.toString(item.get("IImgNum"), "").replace(".png", "");
                         int imageResId = getResources().getIdentifier(resourceName, "drawable", getActivity().getPackageName());
                         boolean isLiked = false;
 
-                        publis nuevaPublicacion = new publis(nombre, hora, fecha, publicaccion,imageResId);
+                        publis nuevaPublicacion = new publis(nombre, hora, fecha, publicacion, imageResId);
                         nuevaPublicacion.setLiked(isLiked);
                         nuevasPublicaciones.add(nuevaPublicacion);
                     }
@@ -113,26 +136,42 @@ public class publicaciones extends Fragment {
                         publisList.addAll(nuevasPublicaciones);
                         getActivity().runOnUiThread(() -> {
                             adapter.submitList(new ArrayList<>(publisList));
-                            binding.publisrecycler.post(() -> binding.publisrecycler.scrollToPosition(0));
+                            if (binding.swipeRefreshLayout.isRefreshing()) {
+                                binding.swipeRefreshLayout.setRefreshing(false);
+                            }
                             estaCargando = false;
                         });
 
                         ciclo++;
                     } else {
-                        estaCargando = false;
+                        getActivity().runOnUiThread(() -> {
+                            if (binding.swipeRefreshLayout.isRefreshing()) {
+                                binding.swipeRefreshLayout.setRefreshing(false);
+                            }
+                            estaCargando = false;
+                        });
                     }
                 } else {
-                    estaCargando = false;
+                    getActivity().runOnUiThread(() -> {
+                        if (binding.swipeRefreshLayout.isRefreshing()) {
+                            binding.swipeRefreshLayout.setRefreshing(false);
+                        }
+                        estaCargando = false;
+                    });
                 }
             }
 
             @Override
             public void onFailure(Call call, IOException e) {
-                estaCargando = false;
+                getActivity().runOnUiThread(() -> {
+                    if (binding.swipeRefreshLayout.isRefreshing()) {
+                        binding.swipeRefreshLayout.setRefreshing(false);
+                    }
+                    estaCargando = false;
+                });
             }
         });
     }
-
 
     @Override
     public void onDestroyView() {
@@ -140,3 +179,4 @@ public class publicaciones extends Fragment {
         binding = null;
     }
 }
+

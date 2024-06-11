@@ -7,6 +7,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,9 +26,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -57,6 +63,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class feed extends AppCompatActivity implements View.OnClickListener {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -74,8 +83,8 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
         FirebaseApp.initializeApp(this);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(10000); // 10 segundos
-        locationRequest.setFastestInterval(5000); // 5 segundos
+        locationRequest.setInterval(60000); // 60 segundos
+        locationRequest.setFastestInterval(45000); // 45 segundos
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         locationCallback = new LocationCallback() {
@@ -117,8 +126,8 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_UNLABELED);
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -137,6 +146,13 @@ public class feed extends AppCompatActivity implements View.OnClickListener {
         nombre_Nav= headerView.findViewById(R.id.name);
         email_nav = headerView.findViewById(R.id.email);
         new CheckUserConnectedTaskusuarios().execute();
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHostFragment.getNavController();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_UNLABELED);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
 
     }

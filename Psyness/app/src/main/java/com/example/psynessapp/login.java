@@ -74,8 +74,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
         // Configurar LocationRequest
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(10000); // 10 segundos
-        locationRequest.setFastestInterval(5000); // 5 segundos
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         // Inicializar LocationCallback
