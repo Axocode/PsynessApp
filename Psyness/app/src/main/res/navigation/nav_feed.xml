@@ -13,9 +13,14 @@
 
     <fragment
         android:id="@+id/navigation_mensaje"
-        android:name="com.example.psynessapp.feed.prueba"
-        android:label="fragment_prueba"
-        tools:layout="@layout/fragment_prueba" />
+        android:name="com.example.psynessapp.feed.axochat"
+        android:label="fragment_axochat"
+        tools:layout="@layout/fragment_axochat" />
+    <fragment
+        android:id="@+id/navigation_datecenter"
+        android:name="com.example.psynessapp.feed.datacenterfragment"
+        android:label="fragment_datacenterfragment"
+        tools:layout="@layout/fragment_datacenterfragment" />
 
 
 </navigation>
