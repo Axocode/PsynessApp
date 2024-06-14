@@ -21,6 +21,11 @@
         android:name="com.example.psynessapp.feed.datacenterfragment"
         android:label="fragment_datacenterfragment"
         tools:layout="@layout/fragment_datacenterfragment" />
+    <fragment
+        android:id="@+id/navigation_buscar"
+        android:name="com.example.psynessapp.feed.buscadorFragment"
+        android:label="fragment_buscador"
+        tools:layout="@layout/fragment_buscador" />
 
 
 </navigation>
